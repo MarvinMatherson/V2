@@ -1,14 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {AntDesign} from '@expo/vector-icons';
+
 
 const SecondScreen = () => {
+
+const showSearch = (newShow) =>{
+
+}
+
+
+
+
+
+
+
+
     return(
       
 <View style={styles.container}>
     
   <Text style = {styles.header}>Search for a show!</Text>  
   <TextInput  style = {styles.search}/>
-
+  <TouchableOpacity>
+    <AntDesign name="search1" size={24} color='black' />
+  </TouchableOpacity>
 
 </View>
 
