@@ -3,9 +3,9 @@ import { View, Button, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList,
 import ShowDisplay from './components/ShowDisplay';
 
 const HomeScreen = ({navigation}) => {
-
-  const [data, setData] = useState([]);
+const [data, setData] = useState([]);
   
+
   useEffect(()=>{
     fetch('https://api.tvmaze.com/search/shows?q=car')
     .then((response)=> response.json())
@@ -15,9 +15,7 @@ const HomeScreen = ({navigation}) => {
           
 
   return (
- 
     <ShowDisplay  setData={data} navigation={navigation} />
-
   )}
 
      
