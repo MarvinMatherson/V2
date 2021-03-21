@@ -17,14 +17,14 @@ const check = (tvshow) => {
   }
 }
 
-const Shows = ({navigation, route}) => {
+const People = ({navigation, route}) => {
 const { id } = route.params;
 
 const [tvshow, setShow] = useState([])
 console.log(id)
 
 useEffect(()=>{
-  fetch('http://api.tvmaze.com/shows/'+id)
+  fetch('http://api.tvmaze.com/people/'+id)
   .then((response)=> response.json())
   .then((json)=> setShow(json))
   .catch((error)=>alert(error))
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Shows;
+export default People;

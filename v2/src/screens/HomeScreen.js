@@ -1,21 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { View, Button, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, SafeAreaView, ActivityIndicator, Image } from "react-native";
-import ShowDisplay from './components/ShowDisplay';
+import { View, Button, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, SafeAreaView, ActivityIndicator, Image, useFocusEffect, RefreshControl} from "react-native";
+import HomeDisplay from './components/DisplayHome';
 
 const HomeScreen = ({navigation}) => {
-const [data, setData] = useState([]);
-  
-
-  useEffect(()=>{
-    fetch('https://api.tvmaze.com/search/shows?q=car')
-    .then((response)=> response.json())
-    .then((json)=> setData(json))
-    .catch((error)=>alert(error))
-  },[]);
-          
 
   return (
-    <ShowDisplay  setData={data} navigation={navigation} />
+      <HomeDisplay navigation = {navigation}  />
   )}
 
      

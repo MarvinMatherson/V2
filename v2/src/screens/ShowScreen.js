@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, FlatList, RefreshControl } from "react-native";
-import PeopleDisplay from './components/DisplayPeople';
-
+import ShowDisplay from './components/DisplayShow';
 
 
 const ShowScreen = ({navigation}) => {
 
 
 return(
-    <PeopleDisplay navigation = {navigation} />
+    <ShowDisplay navigation = {navigation} />
 )
 
 }

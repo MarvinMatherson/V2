@@ -4,9 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from './src/screens/HomeScreen';
-import Shows from './src/screens/Shows';
-import SecondScreen from './src/screens/SecondScreen.js';
+import ShowScreen from './src/screens/ShowScreen';
 import PeopleScreen from'./src/screens/PeopleScreen';
+import Shows from './src/screens/Shows';
+import People from './src/screens/People';
 import {MaterialIcons} from '@expo/vector-icons';
 
 
@@ -18,7 +19,7 @@ const screenOptionStyle = {
     backgroundColor: "#10AC84",
   },
   headerTintColor: "#ffff",
-  headerBackTitle: "#ffff",
+  headerBackTitle: "Return",
 };
 
 
@@ -34,39 +35,42 @@ return(
            <MaterialIcons name='menu' style={styles.color} onPress={() =>navigation.openDrawer()} size={28} /> 
           </View>
           }}
-         
         />
-        <Stack.Screen name="Shows" component={Shows} />
-        <Stack.Screen name="People" component={People} />
+        <Stack.Screen name="Show" component={Shows} />
+        <Stack.Screen name="Person" component={People} />
       </Stack.Navigator>
       );
   }
+
+
 //Show stack navigator, using the navigation prop to open drawer
-const ShowScreen = ({navigation}) => {
+const theShows = ({navigation}) => {
       return(
         <Stack.Navigator screenOptions={screenOptionStyle}>
             <Stack.Screen 
-              name="Shows" component={SecondScreen} 
+              name="Shows" component={ShowScreen} 
               options={{headerTitle: 
               <View>
                 <MaterialIcons style={styles.color} name='menu' onPress={() =>navigation.openDrawer()} size={28} /> 
               </View>
               }} />
+              <Stack.Screen name="Show" component={Shows} />
         </Stack.Navigator>
           );
         }
 
 //People stack navigator, using the navigation prop to open drawer
-const People = ({navigation}) => {
+const thePerson = ({navigation}) => {
   return(
     <Stack.Navigator screenOptions={screenOptionStyle}>
         <Stack.Screen 
           name="People" component={PeopleScreen} 
           options={{headerTitle: 
           <View>
-            <MaterialIcons name='menu' onPress={() =>navigation.openDrawer()} size={28} /> 
+            <MaterialIcons name='menu' style={styles.color} onPress={() =>navigation.openDrawer()} size={28} /> 
           </View>
           }} />
+      <Stack.Screen name="Person" component={People} />
     </Stack.Navigator>
       );
 }
@@ -80,8 +84,8 @@ const App = () => {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={MainStack} /> 
-        <Drawer.Screen name="Show Screen" component={ShowScreen} /> 
-        <Drawer.Screen name="People Screen" component={People} />
+        <Drawer.Screen name="Show Screen" component={theShows} /> 
+        <Drawer.Screen name="People Screen" component={thePerson} />
       </Drawer.Navigator>
       </NavigationContainer>
   );
@@ -92,15 +96,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   header: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   color: {
-     color: '#000'
+    marginRight: 200,
+     color: '#fff'
     },
     input: {
       height: 40,
