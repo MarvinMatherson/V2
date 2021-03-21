@@ -17,6 +17,28 @@ const check = (tvshow) => {
   }
 }
 
+const specialRemove = (tvshow) => {
+  if(tvshow.summary){
+
+    const remove = ['<p>', '</p>', '<br>', '<b>']
+
+    const original = tvshow.summary;
+    const changed = original.replace(/(<([^>]+)>)/ig," ")
+    return(
+      <Text style={styles.summary}>{changed}</Text>
+    )
+  } else{
+    return(
+      <Text>There is no summary for this show!</Text>
+    )
+  }
+}
+
+
+
+
+
+
 const Shows = ({navigation, route}) => {
 const { id } = route.params;
 
@@ -37,7 +59,7 @@ useEffect(()=>{
   <ScrollView>
   {check(tvshow)}
 <Text style={styles.header}>{tvshow.name}</Text>
-<Text style={styles.summary}>{tvshow.summary}</Text>
+{specialRemove(tvshow)}
   </ScrollView>
 
 </View>

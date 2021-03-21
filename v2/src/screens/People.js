@@ -17,6 +17,23 @@ const check = (tvshow) => {
   }
 }
 
+const specialRemove = () => {
+  if(tvshow.summary){
+    const original = tvshow.summary;
+    const changed = original.replace('<p>', '</p>', '<br>', '')
+    return(
+      <Text style={styles.summary}>{changed}</Text>
+    )
+  } else{
+    return(
+      <Text>There is no summary for this show!</Text>
+    )
+  }
+}
+
+
+
+
 const People = ({navigation, route}) => {
 const { id } = route.params;
 

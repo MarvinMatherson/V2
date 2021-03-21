@@ -9,6 +9,7 @@ import PeopleScreen from'./src/screens/PeopleScreen';
 import Shows from './src/screens/Shows';
 import People from './src/screens/People';
 import {MaterialIcons} from '@expo/vector-icons';
+import CustomDrawer from './shared/Drawer';
 
 
 const Drawer = createDrawerNavigator();
@@ -16,9 +17,9 @@ const Stack = createStackNavigator();
  
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: "#10AC84",
+    backgroundColor: "#6EC3BA",
   },
-  headerTintColor: "#ffff",
+  headerTintColor: "#3F3F3F",
   headerBackTitle: "Return",
 };
 
@@ -82,14 +83,16 @@ const thePerson = ({navigation}) => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={MainStack} /> 
+      <Drawer.Navigator initialRouteName="Home"
+        drawerStyle = {styles.drawer}
+        drawerContent = {props => <CustomDrawer {...props} />}>
+        <Drawer.Screen name="Home" style={styles.text} component={MainStack} /> 
         <Drawer.Screen name="Show Screen" component={theShows} /> 
-        <Drawer.Screen name="People Screen" component={thePerson} />
+        <Drawer.Screen name="People Screen"  component={thePerson} />
       </Drawer.Navigator>
       </NavigationContainer>
   );
-}
+  }
 
 const styles = StyleSheet.create({
   container: {
@@ -105,13 +108,19 @@ const styles = StyleSheet.create({
   },
   color: {
     marginRight: 200,
-     color: '#fff'
+     color: '#3F3F3F'
     },
     input: {
       height: 40,
       margin: 12,
       borderWidth: 1,
     },
+    drawer:{
+      
+    },
+    text:{
+      color: 'red',
+    }
 });
 
 export default App;

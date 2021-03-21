@@ -51,6 +51,7 @@ const check = (item) => {
 }
 
 
+
 return(
   <View>
   {data? (<View style={styles.resultsContainer}>
@@ -65,8 +66,8 @@ refreshControl={
   data={data}
   keyExtractor={(item, index)=> index.toString()}
   renderItem={({item}) => (
-    <>
-    <TouchableOpacity style = {styles.show}onPress={() => navigation.navigate('toShow', {
+    
+    <TouchableOpacity style = {styles.show}onPress={() => navigation.navigate('Show', {
      id: item.show.id,
 
     } )}>    
@@ -78,8 +79,6 @@ refreshControl={
 
   </TouchableOpacity>
    
-
-</>
   )}
   
   />
