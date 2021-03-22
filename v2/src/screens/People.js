@@ -4,10 +4,12 @@ import { Button, View, StyleSheet, Text, Image, ActivityIndicator, FlatList} fro
 import { ScrollView } from "react-native-gesture-handler";
 
 
-const check = (tvshow) => {
-  if(tvshow.image){
+const People = ({navigation, route}) => {
+
+const check = (person) => {
+  if(person.image){
     return(
-      <Image source={{uri:tvshow.image.medium}} style={{width:'100%', height: 400}} />
+      <Image source={{uri:person.image.medium}} style={{width:'100%', height: 400}} />
     )
   }else{
     return(
@@ -17,44 +19,43 @@ const check = (tvshow) => {
   }
 }
 
-const specialRemove = () => {
-  if(tvshow.summary){
-    const original = tvshow.summary;
-    const changed = original.replace('<p>', '</p>', '<br>', '')
+const birthday = (person) => {
+  if(person.birthday){
     return(
-      <Text style={styles.summary}>{changed}</Text>
+      <Text>{person.name}'s birthday is {person.birthday}.</Text>
     )
-  } else{
-    return(
-      <Text>There is no summary for this show!</Text>
-    )
-  }
+
+}else{
+  return(
+    <Text>There is no birthday available for {person.name}.</Text>
+  )
+ 
 }
 
+}
 
-
-
-const People = ({navigation, route}) => {
 const { id } = route.params;
 
-const [tvshow, setShow] = useState([])
+const [person, setPerson] = useState([])
 console.log(id)
 
 useEffect(()=>{
   fetch('http://api.tvmaze.com/people/'+id)
   .then((response)=> response.json())
-  .then((json)=> setShow(json))
+  .then((json)=> setPerson(json))
   .catch((error)=>alert(error))
 },[id]);
 
   return (
 <View>
-{tvshow ? (
+{person ? (
 <View>
   <ScrollView>
-  {check(tvshow)}
-<Text style={styles.header}>{tvshow.name}</Text>
-<Text style={styles.summary}>{tvshow.summary}</Text>
+  {check(person)}
+<Text style={styles.header}>{person.name}</Text>
+  {birthday(person)}
+  <Text>{person.name} identifies as a {person.gender}.</Text>
+  <Text>Do you want to know more about {person.name}? You can vist his website at: {person.url}</Text>
   </ScrollView>
 
 </View>
@@ -65,6 +66,7 @@ useEffect(()=>{
 )}
 </View>
   )
+
 }
 
 

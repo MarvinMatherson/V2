@@ -1,13 +1,19 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
-
+import { color } from 'react-native-reanimated';
+import { useFonts } from 'expo-font';
 
 
 const ShowDisplay = ({navigation}) => {
 
   const[text, changeText] = useState('');
   const[data, setData] = useState([]);
+
+  const [loaded, error] = useFonts({ 
+
+
+   });
 
 
   const check = (item) => {
@@ -41,11 +47,13 @@ console.log('text is currently '+ text)
 
 return( 
   <View style={styles.container}>
+    <Text style={styles.categories}>Shows</Text>
     <View style = {styles.searchform}>
       <TextInput 
-        placeholder = 'Search for a show'
-         style = {styles.search}
-         onChangeText={text => changeHandler(text)}
+        placeholder = 'Search here for a show!'
+        placeholderTextColor={'grey'}
+        style = {styles.search}
+        onChangeText={text => changeHandler(text)}
       />
      
     </View>
@@ -59,10 +67,7 @@ return(
             data={data}
             renderItem={({item}) => (
                <TouchableOpacity style = {styles.show} onPress={() =>          
-                    navigation.navigate('Show', {
-                      id: item.show.id,
-                    } )}>    
-    
+                  navigation.navigate('Show', {id: item.show.id} )}>    
                 <View style={styles.text}>
                   {check(item)}
                 </View>
@@ -89,35 +94,38 @@ container: {
 flex: 1,
 backgroundColor: '#fff',
 alignItems: 'center',
-
-
 },
+
 search :{
   paddingLeft: 15,
-  marginTop: 20,
-  borderRadius:30,
-  width: 200,
-  height: 30,
-  borderWidth: 1,
-  borderColor: '#000'
+  width: 300,
+  height: 40,
+  borderWidth: 2,
+ 
+  borderColor: '#3F3F3F',
+  color: '#3F3F3F',
+  marginBottom: 10,
 }, header : {
   marginTop: 20,
   fontSize: 30,
+  
 },
 searchform:{
 flexDirection: 'row',
 },
-
 show:{
   width: '33.3%',
   height: 200,
   borderStyle: "solid",
   borderColor: 'white',
-  borderWidth: 1,
 }, 
 list:{
- marginTop: 20,
- 
+ marginTop: 0,
+},
+categories:{
+  fontSize: 70,
+  color: '#3F3F3F',
+
 }
 
 });

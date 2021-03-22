@@ -67,10 +67,7 @@ refreshControl={
   keyExtractor={(item, index)=> index.toString()}
   renderItem={({item}) => (
     
-    <TouchableOpacity style = {styles.show}onPress={() => navigation.navigate('Show', {
-     id: item.show.id,
-
-    } )}>    
+    <TouchableOpacity style = {styles.show} onPress={() => navigation.navigate('Show', {id: item.show.id} )}>    
     {check(item)}
     <View style={styles.text}>
      </View>

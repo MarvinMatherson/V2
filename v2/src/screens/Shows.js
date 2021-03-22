@@ -1,27 +1,23 @@
-
 import React, { useState, useEffect} from "react";
 import { Button, View, StyleSheet, Text, Image, ActivityIndicator, FlatList} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
+const Shows = ({navigation, route}) => {
 
 const check = (tvshow) => {
   if(tvshow.image){
     return(
-      <Image source={{uri:tvshow.image.medium}} style={{width:'100%', height: 400}} />
+      <Image source={{uri: tvshow.image.medium}} style={{width:'100%', height: 400}} />
     )
   }else{
     return(
       <Image source={require('./components/noimage.png')} style={{width: '100%', height: 200}} />
-
     )
   }
 }
 
 const specialRemove = (tvshow) => {
   if(tvshow.summary){
-
-    const remove = ['<p>', '</p>', '<br>', '<b>']
-
     const original = tvshow.summary;
     const changed = original.replace(/(<([^>]+)>)/ig," ")
     return(
@@ -36,14 +32,11 @@ const specialRemove = (tvshow) => {
 
 
 
-
-
-
-const Shows = ({navigation, route}) => {
 const { id } = route.params;
 
 const [tvshow, setShow] = useState([])
-console.log(id)
+
+
 
 useEffect(()=>{
   fetch('http://api.tvmaze.com/shows/'+id)
@@ -51,6 +44,10 @@ useEffect(()=>{
   .then((json)=> setShow(json))
   .catch((error)=>alert(error))
 },[id]);
+
+
+
+console.log(tvshow.name)
 
   return (
 <View>
@@ -60,12 +57,15 @@ useEffect(()=>{
   {check(tvshow)}
 <Text style={styles.header}>{tvshow.name}</Text>
 {specialRemove(tvshow)}
-  </ScrollView>
+<Text  style = {styles.episodes} onPress={() => navigation.navigate('Episodes', {tvshowID: tvshow.id})}>Click me to go to episodes!</Text>
 
+
+
+  </ScrollView>
 </View>
 ) : (
 <View>
-<ActivityIndicator size="large" color="#000"/>
+<ActivityIndicator size="large" color="#3F3F3F"/>
 </View>
 )}
 </View>
@@ -99,6 +99,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     textAlign: 'center',
+  },
+  episodes:{
+    textAlign: 'center',
+    color: 'red',
+    marginBottom: 100,
   }
 });
 

@@ -41,9 +41,11 @@ console.log('text is currently '+ text)
 
 return( 
   <View style={styles.container}>
+    <Text style ={styles.categories}>People</Text>
     <View style = {styles.searchform}>
       <TextInput 
-        placeholder = 'Search for a person'
+        placeholder = 'Search here for a person!'
+        placeholderTextColor={'grey'}
          style = {styles.search}
          onChangeText={text => changeHandler(text)}
       />
@@ -89,18 +91,19 @@ container: {
 flex: 1,
 backgroundColor: '#fff',
 alignItems: 'center',
-
-
 },
+
 search :{
   paddingLeft: 15,
-  marginTop: 20,
-  borderRadius:30,
-  width: 200,
-  height: 30,
-  borderWidth: 1,
-  borderColor: '#000'
-}, header : {
+  width: 300,
+  height: 40,
+  borderWidth: 2,
+  borderColor: '#3F3F3F',
+  color: '#3F3F3F',
+  marginBottom: 10,
+}, 
+
+header : {
   marginTop: 20,
   fontSize: 30,
 },
@@ -117,9 +120,11 @@ show:{
 }, 
 list:{
  marginTop: 20,
- 
+},
+categories:{
+  fontSize: 70,
+  color: '#3F3F3F',
 }
-
 });
 
   

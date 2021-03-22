@@ -7,14 +7,15 @@ import HomeScreen from './src/screens/HomeScreen';
 import ShowScreen from './src/screens/ShowScreen';
 import PeopleScreen from'./src/screens/PeopleScreen';
 import Shows from './src/screens/Shows';
+import Episodes from './src/screens/Episodes';
 import People from './src/screens/People';
 import {MaterialIcons} from '@expo/vector-icons';
 import CustomDrawer from './shared/Drawer';
 
-
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
  
+
 const screenOptionStyle = {
   headerStyle: {
     backgroundColor: "#6EC3BA",
@@ -22,7 +23,6 @@ const screenOptionStyle = {
   headerTintColor: "#3F3F3F",
   headerBackTitle: "Return",
 };
-
 
 //This is the MainStack component. The ONLY thing to be rendered is the HomeScreen component with the stack navbar that has a button to open the drawer.
 const MainStack = ({navigation}) => {
@@ -39,6 +39,7 @@ return(
         />
         <Stack.Screen name="Show" component={Shows} />
         <Stack.Screen name="Person" component={People} />
+        <Stack.Screen name="Episodes" component={Episodes} />
       </Stack.Navigator>
       );
   }
@@ -56,6 +57,7 @@ const theShows = ({navigation}) => {
               </View>
               }} />
               <Stack.Screen name="Show" component={Shows} />
+              <Stack.Screen name="Episodes" component={Episodes} />
         </Stack.Navigator>
           );
         }
@@ -85,6 +87,7 @@ const App = () => {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home"
         drawerStyle = {styles.drawer}
+        drawerType = 'slide'
         drawerContent = {props => <CustomDrawer {...props} />}>
         <Drawer.Screen name="Home" style={styles.text} component={MainStack} /> 
         <Drawer.Screen name="Show Screen" component={theShows} /> 
