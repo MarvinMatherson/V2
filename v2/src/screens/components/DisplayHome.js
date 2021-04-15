@@ -19,12 +19,12 @@ export default function HomeDisplay({navigation}) {
   }
 
   const [refreshing, setRefreshing] = React.useState(false);
-  
+
+
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
       wait(0.1)
       .then(() => setRefreshing(false))
-      
     }, []);
 
 
@@ -33,7 +33,7 @@ const random = Math.floor(Math.random() * randomShows.length)
 const chooseShow = randomShows[random];
 
 
-  useEffect(()=>{
+useEffect(()=>{
     getNewShow();
   },[refreshing]);
 
@@ -50,11 +50,9 @@ const check = (item) => {
   }
 }
 
-
-
 return(
   <View>
-  {data? (<View style={styles.resultsContainer}>
+  {data ? (<View style={styles.resultsContainer}>
 <FlatList
 refreshControl={
   <RefreshControl
@@ -71,14 +69,10 @@ refreshControl={
     {check(item)}
     <View style={styles.text}>
      </View>
-
-
-
-  </TouchableOpacity>
-   
+   </TouchableOpacity>
   )}
-  
   />
+  
 </View>) : (<View style={styles.loadingContainer}>
 
 <ActivityIndicator size="large" color="#000"/>

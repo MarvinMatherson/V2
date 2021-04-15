@@ -7,15 +7,17 @@ import { useFonts } from 'expo-font';
 
 const ShowDisplay = ({navigation}) => {
 
+//declaring our usestates
   const[text, changeText] = useState('');
   const[data, setData] = useState([]);
 
+//This was gonna be our fonts but it never worked
   const [loaded, error] = useFonts({ 
-
 
    });
 
 
+ //Condition check if show has an image, if not show a placeholder. This is important as data won't load without an image
   const check = (item) => {
     if(item.show.image){
       return(
@@ -28,7 +30,7 @@ const ShowDisplay = ({navigation}) => {
     }
   }
   
-
+//This function makes a call to the api using the 'text' as the query  and sets 'data' to the results found
  const showfind = () =>{
   fetch('https://api.tvmaze.com/search/shows?q=' + text)
   .then((response)=> response.json())
@@ -37,14 +39,19 @@ const ShowDisplay = ({navigation}) => {
  }
 
 
-
+//Function to handle the text inputted by the user. Sets 'text' to what the user inputs and the runs 'showfind' function
 const changeHandler = (text) =>{
  changeText(text)
  showfind();
 }
 
+
+//Just a log to show what the text currently is as you type it
 console.log('text is currently '+ text)
 
+
+
+//this is what is gonna be displayed to user. Show the user a search box and 'Search here for a show' text
 return( 
   <View style={styles.container}>
     <Text style={styles.categories}>Shows</Text>
@@ -55,9 +62,8 @@ return(
         style = {styles.search}
         onChangeText={text => changeHandler(text)}
       />
-     
     </View>
-  
+  {/*  Displays the shows relevant to what the user types into the box in a flatlist. Each one is clickable and naviagtes to its own show page, by passing through its id     */}
     <View>
      {data? (<View style={styles.resultsContainer}>
         <FlatList
@@ -75,6 +81,8 @@ return(
             )}
     
         />
+          {/*  if no data, show loading spinner */}
+
         </View>) : (<View style={styles.loadingContainer}>
   
         <ActivityIndicator size="large" color="#000"/>
@@ -88,6 +96,8 @@ return(
 
 }
 
+
+//The stylesheets for everything
 const styles = StyleSheet.create({
 
 container: {
