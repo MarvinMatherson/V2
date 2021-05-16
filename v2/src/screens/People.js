@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect} from "react";
-import { Button, View, StyleSheet, Text, Image, ActivityIndicator, FlatList} from "react-native";
+import { Button, View, StyleSheet, Text, Image, Linking, ActivityIndicator, FlatList} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 
@@ -19,10 +19,28 @@ const check = (person) => {
   }
 }
 
+const checkUrl =(person) =>{
+
+  if(person.url){
+    return(
+      <View>
+      <Button style={styles.url} onPress={() =>  Linking.openURL(person.url)} title='Visit website'></Button>
+         </View>
+  
+    )
+  }
+else{
+  return(
+    <Text>There was no link for this person.</Text>
+  )
+}
+
+}
+
 const birthday = (person) => {
   if(person.birthday){
     return(
-      <Text>{person.name}'s birthday is {person.birthday}.</Text>
+      <Text style={styles.birthday}>{person.name}'s birthday is {person.birthday}.</Text>
     )
 
 }else{
@@ -55,7 +73,7 @@ useEffect(()=>{
 <Text style={styles.header}>{person.name}</Text>
   {birthday(person)}
   <Text>{person.name} identifies as a {person.gender}.</Text>
-  <Text>Do you want to know more about {person.name}? You can vist his website at: {person.url}</Text>
+  {checkUrl(person)}
   </ScrollView>
 
 </View>
@@ -68,8 +86,6 @@ useEffect(()=>{
   )
 
 }
-
-
 
 
 const styles = StyleSheet.create({
@@ -96,6 +112,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     textAlign: 'center',
+  },
+  url:{
+    marginTop: 20,
+  },
+  birthday:{
+    flex: 1,
+    alignItems: "center",
+    textAlign: "center",
   }
 });
 
