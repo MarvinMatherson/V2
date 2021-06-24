@@ -5,9 +5,15 @@ import {DrawerActions} from '@react-navigation/native';
 import { Icon } from 'react-native-elements'
 
 
-const CustomDrawer = ({...props}) =>{   
+
+//To make a custom drawer we need to have a drawercontentscrollview (which is like a scroll view but for a drawer) and each link to a page is a draweritem. 
+
+
+
+
+const CustomDrawer = ({...props}) =>{   //This is the custom drawer and we are pullling in the properties
 return(
-  <DrawerContentScrollView {...props}>
+  <DrawerContentScrollView {...props}> 
     <Image source={require('./tvm-header-logo.png')} style={styles.logo}/>
     <View style = {styles.routes}>
     <DrawerItem 
